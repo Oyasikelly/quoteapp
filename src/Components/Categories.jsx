@@ -1,7 +1,8 @@
 /** @format */
 import { useEffect, useState } from "react";
 import image from "../assets/usgs-eAGoXRFiysw-unsplash.jpg";
-export default function Categories() {
+import { Link, useNavigate } from "react-router-dom";
+export default function Categories({ setSelectedQuote, selectedQuote }) {
   const CategoriesArr = [
     "--select--",
     "age",
@@ -73,11 +74,13 @@ export default function Categories() {
     "success",
   ];
 
+  const navigate = useNavigate();
   const [category, setCategory] = useState();
   const [searchedQuote, setSearchQuote] = useState([]);
   const [testCat, setTestCat] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [openLayer, setOpenLayer] = useState(false);
   function handleCategories(e) {
     setCategory(() => e.target.value);
   }
@@ -119,6 +122,13 @@ export default function Categories() {
     setTestCat(category);
   }
 
+  //
+
+  // Handling Pop Up Layer
+  function handlePopUpLayer(result) {
+    setSelectedQuote("Quote has been choosen");
+    // setOpenLayer(() => (openLayer ? !openLayer : null));
+  }
   return (
     <div className="flex flex-col items-center relative bg-local-image bg-cover bg-center h-screen">
       <div className="bg-black/55  h-screen p-4 absolute top-0 left-0 right-0 flex flex-col items-center">
@@ -139,7 +149,12 @@ export default function Categories() {
         <div className="text-sky-300 flex flex-col items-center flex-wrap">
           {isLoading && <Loader />}
           {!isLoading && !error && (
-            <SearchQuote searchedQuote={searchedQuote} />
+            <SearchQuote
+              searchedQuote={searchedQuote}
+              handlePopUpLayer={handlePopUpLayer}
+              openLayer={openLayer}
+              navigate={navigate}
+            />
           )}
           {error && <ErrorMessage messsage={error} />}
         </div>
@@ -154,14 +169,16 @@ export default function Categories() {
   );
 }
 
-function SearchQuote({ searchedQuote }) {
+function SearchQuote({ searchedQuote, openLayer, handlePopUpLayer, navigate }) {
   return (
     <>
       {searchedQuote.map((result, i) => (
         <div
           key={i}
-          className="text-2xl font-roboto border border-sky-300 mt-12 w-2/3 max-w-2xl text-center  rounded p-4"
+          className="text-2xl font-roboto border border-sky-300 mt-12 w-2/3 max-w-2xl text-center  rounded p-4 relative"
+          onClick={handlePopUpLayer(result)}
         >
+          {openLayer && <PopUpLayer navigate={navigate} />}
           <p>
             {result.quote}
             <br />
@@ -183,4 +200,17 @@ function Loader() {
 }
 function ErrorMessage({ messsage }) {
   return <p className="text-red">{messsage}</p>;
+}
+
+function PopUpLayer({ navigate }) {
+  function handleIndex() {
+    navigate("/Categories");
+  }
+  return (
+    <div className="w-full absolute p-4 bg-sky-200 text-grey-200">
+      <p>want to save this quote?</p>
+      <button>Yes</button>
+      <button onClick={handleIndex}>No</button>
+    </div>
+  );
 }
