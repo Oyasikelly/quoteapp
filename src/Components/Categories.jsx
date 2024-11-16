@@ -81,10 +81,46 @@ export default function Categories({ setSelectedQuote, selectedQuote }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [openLayer, setOpenLayer] = useState(false);
+  const [addedQuote, setAddedQuote] = useState("");
+  // Using Upslash API call to changhe the background image whenever a selection is done
+  const [getUnSplashImg, setGetUnsplashImg] = useState();
+  const [LoadingImg, setLoadingImg] = useState(false);
+  useEffect(() => {
+    const fetchSinglePhotoByName = async (query) => {
+      const accessKey = "A78AbO0pPDveoMHDhUpVYSg1DTIQeNNPE-5-4W8LMZA";
+      const url = `https://api.unsplash.com/search/photos?query=${query}&per_page=1&client_id=${accessKey}`;
+
+      try {
+        setLoadingImg(true);
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.results.length > 0) {
+          // console.log(data.results[0]);
+          setGetUnsplashImg(data.results[0].urls.full);
+          return data.results[0]; // Returns the single photo result
+        } else {
+          setError("No photo found");
+          return null;
+        }
+      } catch (error) {
+        setError("failed, check your internet connection");
+
+        console.error("Error fetching photo:", error);
+      } finally {
+        setLoadingImg(false);
+      }
+    };
+
+    // Example usage:
+    testCat === category && fetchSinglePhotoByName(testCat);
+  }, [testCat]);
+
   function handleCategories(e) {
     setCategory(() => e.target.value);
   }
 
+  // console.log(getUnSplashImg.urls.full);
   useEffect(() => {
     async function getQuote(category) {
       const APIKEY = "JTW9I21Z12yMtgVQlTaHUQ==SBCyMnrhge3YeAlz";
@@ -126,11 +162,22 @@ export default function Categories({ setSelectedQuote, selectedQuote }) {
 
   // Handling Pop Up Layer
   function handlePopUpLayer(result) {
-    setSelectedQuote("Quote has been choosen");
+    setTimeout(() => {
+      setAddedQuote("");
+    }, 2000);
+    setAddedQuote("Quote Saved 💗");
+    setSelectedQuote(result);
     // setOpenLayer(() => (openLayer ? !openLayer : null));
   }
   return (
     <div className="flex flex-col items-center relative bg-local-image bg-cover bg-center h-screen">
+      {!isLoading && !LoadingImg && !error && (
+        <img
+          src={`${getUnSplashImg}`}
+          alt="Unsplash-Images"
+          className="h-[150vh] w-full -mt-6"
+        />
+      )}
       <div className="bg-black/55  h-screen p-4 absolute top-0 left-0 right-0 flex flex-col items-center">
         <select
           value={category}
@@ -157,6 +204,9 @@ export default function Categories({ setSelectedQuote, selectedQuote }) {
             />
           )}
           {error && <ErrorMessage messsage={error} />}
+          {!isLoading && !LoadingImg && !error && (
+            <AddedQuotes onAddQuote={addedQuote} />
+          )}
         </div>
         <button
           onClick={handleRenderQuote}
@@ -176,7 +226,7 @@ function SearchQuote({ searchedQuote, openLayer, handlePopUpLayer, navigate }) {
         <div
           key={i}
           className="text-2xl font-roboto border border-sky-300 mt-12 w-2/3 max-w-2xl text-center  rounded p-4 relative"
-          onClick={handlePopUpLayer(result)}
+          onClick={() => handlePopUpLayer(result)}
         >
           {openLayer && <PopUpLayer navigate={navigate} />}
           <p>
@@ -211,6 +261,13 @@ function PopUpLayer({ navigate }) {
       <p>want to save this quote?</p>
       <button>Yes</button>
       <button onClick={handleIndex}>No</button>
+    </div>
+  );
+}
+function AddedQuotes({ onAddQuote }) {
+  return (
+    <div>
+      <p className="text-pink-500 font-medium mt-4 ">{onAddQuote}</p>
     </div>
   );
 }
