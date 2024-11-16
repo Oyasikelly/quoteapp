@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import image from "../assets/usgs-eAGoXRFiysw-unsplash.jpg";
 import { Link, useNavigate } from "react-router-dom";
-export default function Categories({ setSelectedQuote, selectedQuote }) {
+export default function Categories({ setSavedQuotes, savedQuotes }) {
   const CategoriesArr = [
     "--select--",
     "age",
@@ -162,13 +162,21 @@ export default function Categories({ setSelectedQuote, selectedQuote }) {
 
   // Handling Pop Up Layer
   function handlePopUpLayer(result) {
-    setTimeout(() => {
-      setAddedQuote("");
-    }, 2000);
     setAddedQuote("Quote Saved 💗");
-    setSelectedQuote(result);
-    // setOpenLayer(() => (openLayer ? !openLayer : null));
+
+    // Check for duplicate quotes before adding
+    setSavedQuotes((prevQuotes) => {
+      const isDuplicate = prevQuotes.some(
+        (quote) => quote.quote === result.quote
+      );
+      return isDuplicate ? prevQuotes : [...prevQuotes, result];
+    });
+
+    setTimeout(() => {
+      setAddedQuote(""); // Clear the notification after 2 seconds
+    }, 2000);
   }
+
   return (
     <div className="flex flex-col items-center relative bg-local-image bg-cover bg-center h-screen">
       {!isLoading && !LoadingImg && !error && (

@@ -7,18 +7,16 @@ import Categories from "./Components/Categories";
 import SavedQuotes from "./Components/SavedQuotes";
 
 export default function App() {
-  const [selectedQuote, setSelectedQuote] = useState(() => {
-    // Retrieve saved quote from localStorage (if any)
-    const savedQuote = localStorage.getItem("selectedQuote");
-    return savedQuote ? JSON.parse(savedQuote) : null;
+  const [savedQuotes, setSavedQuotes] = useState(() => {
+    // Retrieve saved quotes from localStorage (if any)
+    const quotes = localStorage.getItem("savedQuotes");
+    return quotes ? JSON.parse(quotes) : [];
   });
 
   useEffect(() => {
-    if (selectedQuote) {
-      // Save the selected quote to localStorage
-      localStorage.setItem("selectedQuote", JSON.stringify(selectedQuote));
-    }
-  }, [selectedQuote]);
+    // Save the updated list of quotes to localStorage
+    localStorage.setItem("savedQuotes", JSON.stringify(savedQuotes));
+  }, [savedQuotes]);
 
   return (
     <BrowserRouter>
@@ -27,11 +25,21 @@ export default function App() {
           <Route index element={<Hero />} />
           <Route
             path="Categories"
-            element={<Categories setSelectedQuote={setSelectedQuote} />}
+            element={
+              <Categories
+                setSavedQuotes={setSavedQuotes}
+                savedQuotes={savedQuotes}
+              />
+            }
           />
           <Route
             path="SavedQuotes"
-            element={<SavedQuotes selectedQuote={selectedQuote} />}
+            element={
+              <SavedQuotes
+                savedQuotes={savedQuotes}
+                setSavedQuotes={setSavedQuotes}
+              />
+            }
           />
         </Routes>
       </div>

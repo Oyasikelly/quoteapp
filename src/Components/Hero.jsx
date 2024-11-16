@@ -19,7 +19,7 @@ export default function Hero() {
     navigate("/SavedQuotes");
   };
   return (
-    <div className=" relative h-screen w-full">
+    <div className=" relative h-screen overflow-y-scroll smooth w-full">
       {openMenu && (
         <SlidingPanel openMenu={openMenu} onSaved={navigateToSavedQuote} />
       )}
@@ -64,7 +64,7 @@ export default function Hero() {
             )}
           </button>
         </header>
-        <main className="ml-8 mr-8 mt-4 mb-4 w-1/2 self-center text-justify">
+        <main className="ml-8 mr-8 mt-10 mb-4 w-1/2 self-center text-justify">
           <h1 className="text-sky-300 font-bold text-2xl mt-12 mb-8">
             Welcome to Quote2Me – Your Daily Dose of Inspiration
           </h1>
