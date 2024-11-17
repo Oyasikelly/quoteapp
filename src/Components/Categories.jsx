@@ -95,9 +95,9 @@ export default function Categories({ setSavedQuotes, savedQuotes }) {
         const response = await fetch(url);
         const data = await response.json();
 
-        if (data.results.length > 0) {
+        if (data.results.length > 1) {
           // console.log(data.results[0]);
-          setGetUnsplashImg(data.results[1].urls.full);
+          setGetUnsplashImg(data.esults[1].urls.full);
           return data.results[1]; // Returns the single photo result
         } else {
           setError("No photo found");
