@@ -64,7 +64,7 @@ export default function Hero() {
             )}
           </button>
         </header>
-        <main className="ml-8 mr-8 mt-10 mb-4 w-1/2 self-center text-justify">
+        <main className="quote-container ml-8 mr-8 mt-10 mb-4 w-1/2 self-center text-justify">
           <h1 className="text-sky-300 font-bold text-2xl mt-12 mb-8">
             Welcome to Quote2Me – Your Daily Dose of Inspiration
           </h1>
@@ -150,7 +150,7 @@ function SlidingPanel({ openMenu, onSaved }) {
         </span>
         <p className="text-white">Saved Quotes</p>
       </div>
-      <div className="flex flex-row items-center gap-2 cursor-pointer">
+      <div className="flex flex-row items-center gap-2 cursor-pointer py-3">
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -18,3 +18,31 @@
   ); /* Example background for options */
   color: skyblue;
 }
+
+/* Example: Adjust font sizes and padding for mobile */
+@media (max-width: 640px) {
+  .custom-select {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .quote-container {
+    width: 90%;
+    font-size: 16px;
+    padding-top: 4rem;
+    margin: 0 auto;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}
+
+/* Example: Tablet adjustments */
+@media (min-width: 641px) and (max-width: 768px) {
+  .quote-container {
+    width: 80%;
+    font-size: 18px;
+  }
+}
