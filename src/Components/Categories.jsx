@@ -178,7 +178,7 @@ export default function Categories({ setSavedQuotes, savedQuotes }) {
   }
 
   return (
-    <div className="flex flex-col items-center relative bg-local-image bg-cover bg-center h-screen">
+    <div className="flex flex-col items-center relative bg-local-image bg-cover bg-center h-screen overflow-y-scroll">
       {!isLoading && !LoadingImg && !error && (
         <img
           src={`${getUnSplashImg}`}
