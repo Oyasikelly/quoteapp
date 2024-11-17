@@ -183,7 +183,7 @@ export default function Categories({ setSavedQuotes, savedQuotes }) {
         <img
           src={`${getUnSplashImg}`}
           alt="Unsplash-Images"
-          class="w-full h-[180vh] object-cover sm:object-contain md:object-scale-down lg:object-fill"
+          class="w-full h-[300vh] object-cover sm:object-contain md:object-scale-down lg:object-fill"
         />
       )}
       <div className="bg-black/55  h-screen p-4 absolute top-0 left-0 right-0 flex flex-col items-center">
