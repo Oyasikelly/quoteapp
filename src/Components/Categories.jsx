@@ -88,7 +88,7 @@ export default function Categories({ setSavedQuotes, savedQuotes }) {
   useEffect(() => {
     const fetchSinglePhotoByName = async (query) => {
       const accessKey = "A78AbO0pPDveoMHDhUpVYSg1DTIQeNNPE-5-4W8LMZA";
-      const url = `https://api.unsplash.com/search/photos?query=${query}&per_page=1&client_id=${accessKey}`;
+      const url = `https://api.unsplash.com/search/photos?query=${query}&per_page=5&client_id=${accessKey}`;
 
       try {
         setLoadingImg(true);
@@ -97,8 +97,8 @@ export default function Categories({ setSavedQuotes, savedQuotes }) {
         console.log(data);
         if (data.results.length > 0) {
           // console.log(data.results[0]);
-          setGetUnsplashImg(data.results[0].urls.regular);
-          return data.results[0]; // Returns the single photo result
+          setGetUnsplashImg(data.results[4].urls.regular);
+          return data.results[4]; // Returns the single photo result
         } else {
           setError("No photo found");
           return null;
@@ -183,7 +183,7 @@ export default function Categories({ setSavedQuotes, savedQuotes }) {
         <img
           src={`${getUnSplashImg}`}
           alt="Unsplash-Images"
-          className="h-[180vh] w-full -mt-6 overflow-y-scroll"
+          class="w-full h-[180vh] object-cover sm:object-contain md:object-scale-down lg:object-fill"
         />
       )}
       <div className="bg-black/55  h-screen p-4 absolute top-0 left-0 right-0 flex flex-col items-center">
