@@ -97,8 +97,8 @@ export default function Categories({ setSavedQuotes, savedQuotes }) {
 
         if (data.results.length > 0) {
           // console.log(data.results[0]);
-          setGetUnsplashImg(data.results[0].urls.full);
-          return data.results[0]; // Returns the single photo result
+          setGetUnsplashImg(data.results[1].urls.full);
+          return data.results[1]; // Returns the single photo result
         } else {
           setError("No photo found");
           return null;
