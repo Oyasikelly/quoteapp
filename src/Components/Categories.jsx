@@ -178,7 +178,7 @@ export default function Categories({ setSavedQuotes, savedQuotes }) {
   }
 
   return (
-    <div className="flex flex-col items-center relative bg-local-image bg-cover bg-center h-screen overflow-y-scroll">
+    <div className="flex flex-col items-center relative bg-local-image bg-contain bg-center h-screen overflow-y-scroll">
       {!isLoading && !LoadingImg && !error && (
         <div className="-mt-6 w-full h-[300vh] object-cover sm:object-contain md:object-scale-down lg:object-fill">
           <img
