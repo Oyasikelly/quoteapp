@@ -180,11 +180,13 @@ export default function Categories({ setSavedQuotes, savedQuotes }) {
   return (
     <div className="flex flex-col items-center relative bg-local-image bg-cover bg-center h-screen overflow-y-scroll">
       {!isLoading && !LoadingImg && !error && (
-        <img
-          src={`${getUnSplashImg}`}
-          alt="Unsplash-Images"
-          class="w-full h-[300vh] object-cover sm:object-contain md:object-scale-down lg:object-fill"
-        />
+        <div className="w-full h-screen">
+          <img
+            src={`${getUnSplashImg}`}
+            alt="Unsplash-Images"
+            class="w-full h-screen object-cover sm:object-contain md:object-scale-down lg:object-fill"
+          />
+        </div>
       )}
       <div className="bg-black/55  h-screen p-4 absolute top-0 left-0 right-0 flex flex-col items-center">
         <select
