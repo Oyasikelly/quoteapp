@@ -1,6 +1,5 @@
 /** @format */
 import { useEffect, useState } from "react";
-import image from "../assets/quoteBackgroundImage.jpg";
 import { Link, useNavigate } from "react-router-dom";
 export default function Categories({ setSavedQuotes, savedQuotes }) {
   const CategoriesArr = [
