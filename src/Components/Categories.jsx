@@ -180,7 +180,7 @@ export default function Categories({ setSavedQuotes, savedQuotes }) {
   return (
     <div className="flex flex-col items-center relative bg-local-image bg-cover bg-center h-screen overflow-y-scroll">
       {!isLoading && !LoadingImg && !error && (
-        <div className="w-full h-screen">
+        <div className="w-full h-screen overflow-scroll">
           <img
             src={`${getUnSplashImg}`}
             alt="Unsplash-Images"
