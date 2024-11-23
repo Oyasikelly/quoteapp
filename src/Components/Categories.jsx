@@ -1,6 +1,6 @@
 /** @format */
 import { useEffect, useState } from "react";
-import image from "../assets/usgs-eAGoXRFiysw-unsplash.jpg";
+import image from "../assets/quoteBackgroundImage.jpg";
 import { Link, useNavigate } from "react-router-dom";
 export default function Categories({ setSavedQuotes, savedQuotes }) {
   const CategoriesArr = [
@@ -180,15 +180,15 @@ export default function Categories({ setSavedQuotes, savedQuotes }) {
   return (
     <div className="flex flex-col items-center relative bg-local-image bg-cover bg-center h-screen overflow-y-scroll">
       {!isLoading && !LoadingImg && !error && (
-        <div className="w-full h-screen overflow-scroll">
+        <div className="-mt-6 w-full h-[300vh] object-cover sm:object-contain md:object-scale-down lg:object-fill">
           <img
             src={`${getUnSplashImg}`}
             alt="Unsplash-Images"
-            class="w-full h-screen object-cover sm:object-contain md:object-scale-down lg:object-fill"
+            className="h-[100%]"
           />
         </div>
       )}
-      <div className="bg-black/55  h-screen p-4 absolute top-0 left-0 right-0 flex flex-col items-center">
+      <div className="overflow-scroll bg-black/55  h-screen p-4 absolute top-0 left-0 right-0 flex flex-col items-center">
         <select
           value={category}
           onChange={handleCategories}
